@@ -1,5 +1,7 @@
 "use client";
 
+
+import "../globals.css"
 import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
