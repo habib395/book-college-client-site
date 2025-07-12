@@ -18,12 +18,12 @@ export default function Colleges() {
           <p>Rating: {college.rating}</p>
           <p>Admission Date: {college.admissionDates}</p>
           <p>Research Papers: {college.research}</p>
-          {/* <Link
+          <Link
               href={`/colleges/${college._id}`}
               className="inline-block mt-2 bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
-            > */}
+            >
               Details
-            {/* </Link> */}
+            </Link>
         </div>
       ))}
     </div>
