@@ -41,7 +41,7 @@ export default function ReviewsSection() {
         />
         <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
           {filteredColleges?.length > 0 ? (
-            filteredColleges.map((college) => (
+            filteredColleges?.map((college) => (
               <CollegeCard key={college._id} college={college} />
             ))
           ) : (

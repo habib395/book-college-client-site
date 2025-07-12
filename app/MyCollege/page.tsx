@@ -3,9 +3,11 @@
 import { useGetAdmissionsQuery } from "@/redux/admissionApi";
 import { useAddReviewMutation } from "@/redux/reviewApi";
 import { useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function MyCollegePage() {
-  const userEmail = "habib@gmail.com"; // Replace with real auth if available
+  const { user } = useAuth()
+  const userEmail = user?.email; // Replace with real auth if available
   const { data: admissions, isLoading } = useGetAdmissionsQuery(userEmail);
   const [addReview] = useAddReviewMutation();
 
