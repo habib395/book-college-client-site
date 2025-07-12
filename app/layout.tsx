@@ -1,10 +1,8 @@
-
 import Footer from '@/components/Footer';
 import Navbar from '../components/Navbar';
-import { Provider } from 'react-redux';
-import { store } from '@/redux/store';
 import { Providers } from './providers';
 import { AuthProvider } from '@/context/AuthContext';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,15 +10,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        >
-         
-          <Providers>
+      <body className="min-h-screen flex flex-col">
+        <Providers>
           <AuthProvider>
-          <Navbar></Navbar>
-        {children}
-        <Footer></Footer>
-        </AuthProvider>
+            <Navbar />
+            
+            <main className="flex-grow">
+              {children}
+            </main>
+            
+            <Footer />
+          </AuthProvider>
         </Providers>
       </body>
     </html>

@@ -1,71 +1,92 @@
 "use client";
+
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-green-400">
-      <ul className="flex justify-between items-center gap-4 px-10 py-4">
-        <Link
-          href="/Home"
-          className="hover:text-gray-200 transition duration-300 block"
-        >
-          Home
-        </Link>
-        <Link
-          href="/colleges"
-          className="hover:text-gray-200 transition duration-300 block"
-        >
-          College
-        </Link>
-        <Link
-          href="/admissions"
-          className="hover:text-gray-200 transition duration-300 block"
-        >
-          Admission
-        </Link>
-        <Link
-          href="/MyCollege"
-          className="hover:text-gray-200 transition duration-300 block"
-        >
-          My College
-        </Link>
+    <nav className="bg-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo / Title */}
+          <div className="flex-shrink-0 text-black font-bold text-xl">
+            <Link href="/">EduPortal</Link>
+          </div>
 
-        {user ? (
-          <>
-            <Link
-              href="/profile"
-              className="hover:text-gray-200 transition duration-300 block"
-            >
-              {user.displayName || user.email}
-            </Link>
-            <button
-              onClick={logout}
-              className="bg-red-500 text-white px-3 py-1 rounded"
-            >
-              Logout
+          {/* Desktop Nav */}
+          <div className="hidden md:flex gap-6 items-center text-black font-medium">
+            <Link href="/Home" className="hover:text-gray-700 transition">Home</Link>
+            <Link href="/colleges" className="hover:text-gray-700 transition">College</Link>
+            <Link href="/admissions" className="hover:text-gray-700 transition">Admission</Link>
+            <Link href="/MyCollege" className="hover:text-gray-700 transition">My College</Link>
+
+            {user ? (
+              <>
+                <Link href="/profile" className="hover:text-gray-700 transition">
+                  {user.displayName || user.email}
+                </Link>
+                <button
+                  onClick={logout}
+                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="hover:text-gray-700 transition">Login</Link>
+                <Link href="/register" className="hover:text-gray-700 transition">Register</Link>
+              </>
+            )}
+          </div>
+
+          {/* Mobile toggle */}
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="text-black">
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          </>
-        ) : (
-          <Link
-            href="/login"
-            className="hover:text-gray-200 transition duration-300 block"
-          >
-            Login
-          </Link>
-        )}
+          </div>
+        </div>
 
-        {!user && (
-          <Link
-            href="/register"
-            className="hover:text-gray-200 transition duration-300 block"
-          >
-            Register
-          </Link>
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="md:hidden mt-2 space-y-2 bg-gray-100 p-4 rounded">
+            <Link href="/Home" onClick={toggleMenu} className="block text-black hover:text-gray-700">Home</Link>
+            <Link href="/colleges" onClick={toggleMenu} className="block text-black hover:text-gray-700">College</Link>
+            <Link href="/admissions" onClick={toggleMenu} className="block text-black hover:text-gray-700">Admission</Link>
+            <Link href="/MyCollege" onClick={toggleMenu} className="block text-black hover:text-gray-700">My College</Link>
+
+            {user ? (
+              <>
+                <Link href="/profile" onClick={toggleMenu} className="block text-black hover:text-gray-700">
+                  {user.displayName || user.email}
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    toggleMenu();
+                  }}
+                  className="w-full text-left bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" onClick={toggleMenu} className="block text-black hover:text-gray-700">Login</Link>
+                <Link href="/register" onClick={toggleMenu} className="block text-black hover:text-gray-700">Register</Link>
+              </>
+            )}
+          </div>
         )}
-      </ul>
+      </div>
     </nav>
   );
 }

@@ -6,26 +6,57 @@ import Link from "next/link";
 export default function Colleges() {
   const { data: colleges, isLoading, error } = useGetCollegesQuery();
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading colleges</p>;
+  if (isLoading)
+    return <p className="text-center py-10 text-lg">Loading colleges...</p>;
+  if (error)
+    return <p className="text-center text-red-600 py-10">Error loading colleges.</p>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {colleges?.map((college: any) => (
-        <div key={college._id} className="p-4 shadow rounded bg-white">
-          <img src={college.image} alt={college.name} className="w-full h-40 object-cover rounded" />
-          <h2 className="text-xl font-semibold mt-2">{college.name}</h2>
-          <p>Rating: {college.rating}</p>
-          <p>Admission Date: {college.admissionDates}</p>
-          <p>Research Papers: {college.research}</p>
-          <Link
-              href={`/colleges/${college._id}`}
-              className="inline-block mt-2 bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
-            >
-              Details
-            </Link>
-        </div>
-      ))}
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-bold text-center text-emerald-700 mb-10">
+        🎓 Available Colleges
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {colleges?.map((college: any) => (
+          <div
+            key={college._id}
+            className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col"
+          >
+            <img
+              src={college.image}
+              alt={college.name}
+              className="w-full h-48 object-cover"
+            />
+
+            <div className="p-5 flex flex-col flex-1">
+              <div className="space-y-2 flex-1">
+                <h2 className="text-xl font-semibold text-emerald-800">
+                  {college.name}
+                </h2>
+                <p className="text-gray-600">
+                  <strong>⭐ Rating:</strong> {college.rating}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Admission Date:</strong> {college.admissionDates}
+                </p>
+                <p className="text-gray-600">
+                  <strong>Research Papers:</strong> {college.research}
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <Link
+                  href={`/colleges/${college._id}`}
+                  className="inline-block text-center bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded transition"
+                >
+                  Details
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
