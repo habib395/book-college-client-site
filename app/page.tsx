@@ -11,11 +11,6 @@ export default function ReviewsSection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredColleges, setFilteredColleges] = useState<typeof colleges>([]);
 
-  const galleryImages = [
-    "/images/gallery/graduates1.jpg",
-    "/images/gallery/graduates2.jpg",
-    "/images/gallery/graduates3.jpg",
-  ];
 
 
   useEffect(() => {

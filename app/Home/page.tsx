@@ -7,10 +7,10 @@ import CollegeCard from "@/components/CollegeCard";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+
 export default function ReviewsSection() {
   const { data: colleges, isLoading } = useGetCollegesQuery();
   const { data: reviews } = useGetReviewsQuery();
-  console.log(reviews)
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredColleges, setFilteredColleges] = useState<typeof colleges>([]);
 

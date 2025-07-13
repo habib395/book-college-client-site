@@ -2,9 +2,11 @@
 
 import { useGetCollegesQuery } from "@/redux/collegeApi";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Colleges() {
   const { data: colleges, isLoading, error } = useGetCollegesQuery();
+  const { user } = useAuth(); // 👈 Add this
 
   if (isLoading)
     return <p className="text-center py-10 text-lg">Loading colleges...</p>;
@@ -46,12 +48,16 @@ export default function Colleges() {
               </div>
 
               <div className="mt-4">
-                <Link
-                  href={`/colleges/${college._id}`}
-                  className="inline-block text-center bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded transition"
-                >
-                  Details
-                </Link>
+                {user ? (
+                  <Link
+                    href={`/colleges/${college._id}`}
+                    className="inline-block text-center bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded transition"
+                  >
+                    Details
+                  </Link>
+                ) : (
+                  <p className="text-center italic text-right text-sm text-emerald-500">Login to see details</p>
+                )}
               </div>
             </div>
           </div>

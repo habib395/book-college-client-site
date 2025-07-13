@@ -17,19 +17,19 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo / Title */}
           <div className="flex-shrink-0 text-black font-bold text-xl">
-            <Link href="/">EduPortal</Link>
+            <Link href="/" className="text-emerald-700">EduPortal</Link>
           </div>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex gap-6 items-center text-black font-medium">
-            <Link href="/Home" className="hover:text-gray-700 transition">Home</Link>
-            <Link href="/colleges" className="hover:text-gray-700 transition">College</Link>
-            <Link href="/admissions" className="hover:text-gray-700 transition">Admission</Link>
-            <Link href="/MyCollege" className="hover:text-gray-700 transition">My College</Link>
+            <Link href="/Home" className="hover:text-emerald-700 transition">Home</Link>
+            <Link href="/colleges" className="hover:text-emerald-700 transition">College</Link>
+            <Link href="/admissions" className="hover:text-emerald-700 transition">Admission</Link>
+            <Link href="/MyCollege" className="hover:text-emerald-700 transition">My College</Link>
 
             {user ? (
               <>
-                <Link href="/profile" className="hover:text-gray-700 transition">
+                <Link href="/profile" className="hover:text-emerald-700 transition">
                   {user.displayName || user.email}
                 </Link>
                 <button
@@ -41,8 +41,8 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/login" className="hover:text-gray-700 transition">Login</Link>
-                <Link href="/register" className="hover:text-gray-700 transition">Register</Link>
+                <Link href="/login" className="hover:text-emerald-700 transition">Login</Link>
+                <Link href="/register" className="hover:text-emerald-700 transition">Register</Link>
               </>
             )}
           </div>
@@ -57,16 +57,16 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden mt-2 space-y-2 bg-gray-100 p-4 rounded">
-            <Link href="/Home" onClick={toggleMenu} className="block text-black hover:text-gray-700">Home</Link>
-            <Link href="/colleges" onClick={toggleMenu} className="block text-black hover:text-gray-700">College</Link>
-            <Link href="/admissions" onClick={toggleMenu} className="block text-black hover:text-gray-700">Admission</Link>
-            <Link href="/MyCollege" onClick={toggleMenu} className="block text-black hover:text-gray-700">My College</Link>
+          <div className="md:hidden mt-2 space-y-2 bg-emerald-100 p-4 rounded">
+            <Link href="/Home" onClick={toggleMenu} className="block text-black hover:text-emerald-700">Home</Link>
+            <Link href="/colleges" onClick={toggleMenu} className="block text-black hover:text-emerald-700">College</Link>
+            <Link href="/admissions" onClick={toggleMenu} className="block text-black hover:text-emerald-700">Admission</Link>
+            <Link href="/MyCollege" onClick={toggleMenu} className="block text-black hover:text-emerald-700">My College</Link>
 
             {user ? (
               <>
-                <Link href="/profile" onClick={toggleMenu} className="block text-black hover:text-gray-700">
-                  {user.displayName || user.email}
+                <Link href="/profile" onClick={toggleMenu} className="block text-black hover:text-emerald-700">
+                  {user.displayName || Profile }
                 </Link>
                 <button
                   onClick={() => {
@@ -80,8 +80,8 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link href="/login" onClick={toggleMenu} className="block text-black hover:text-gray-700">Login</Link>
-                <Link href="/register" onClick={toggleMenu} className="block text-black hover:text-gray-700">Register</Link>
+                <Link href="/login" onClick={toggleMenu} className="block text-black hover:text-emerald-700">Login</Link>
+                <Link href="/register" onClick={toggleMenu} className="block text-black hover:text-emerald-700">Register</Link>
               </>
             )}
           </div>

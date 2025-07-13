@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
+
 
 export default function CollegeCard({ college }) {
+  const { user } = useAuth()
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col h-full">
       <img
@@ -36,15 +39,18 @@ export default function CollegeCard({ college }) {
           </p>
         </div>
 
-        <div className="mt-4">
-          <Link
-            href={`/colleges/${college._id}`}
-            aria-label={`View details for ${college.name}`}
-            className="inline-block text-center bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded transition"
-          >
-            View Details
-          </Link>
-        </div>
+        <div className="mt-4 text-right">
+  {user ? (
+    <Link
+      href={`/colleges/${college?._id}`}
+      className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded transition"
+    >
+      Details
+    </Link>
+  ) : (
+    <p className="text-sm text-emerald-500 italic">Login to view details</p>
+  )}
+</div>
       </div>
     </div>
   );
