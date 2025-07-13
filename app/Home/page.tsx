@@ -12,7 +12,18 @@ export default function ReviewsSection() {
   const { data: colleges, isLoading } = useGetCollegesQuery();
   const { data: reviews } = useGetReviewsQuery();
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredColleges, setFilteredColleges] = useState<typeof colleges>([]);
+  type College = {
+    _id: string;
+    name: string;
+    image: string;
+    admissionDates: string;
+    events: string[];
+    rating: number;
+    research: string;
+    sports: string[];
+  };
+  
+  const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
 
   const galleryImages = [
     "/images/gallery/graduates1.jpg",
@@ -103,8 +114,8 @@ export default function ReviewsSection() {
           />
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {filteredColleges?.length > 0 ? (
-              filteredColleges?.map((college) => (
+            {filteredColleges.length > 0 ? (
+              filteredColleges.map((college) => (
                 <CollegeCard
                   key={college._id}
                   college={college}
