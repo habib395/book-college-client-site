@@ -66,7 +66,7 @@ export default function Navbar() {
             {user ? (
               <>
                 <Link href="/profile" onClick={toggleMenu} className="block text-black hover:text-emerald-700">
-                  {user.displayName || Profile }
+                  {user.displayName || "Profile" }
                 </Link>
                 <button
                   onClick={() => {
