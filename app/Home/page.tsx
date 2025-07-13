@@ -7,22 +7,23 @@ import CollegeCard from "@/components/CollegeCard";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+type College = {
+  _id: string;
+  name: string;
+  image: string;
+  admissionDates: string;
+  events: string[];
+  rating: number;
+  research: string;
+  sports: string[];
+};
+
 
 export default function ReviewsSection() {
   const { data: colleges, isLoading } = useGetCollegesQuery();
   const { data: reviews } = useGetReviewsQuery();
   const [searchTerm, setSearchTerm] = useState("");
-  type College = {
-    _id: string;
-    name: string;
-    image: string;
-    admissionDates: string;
-    events: string[];
-    rating: number;
-    research: string;
-    sports: string[];
-  };
-  
+
   const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
 
   const galleryImages = [

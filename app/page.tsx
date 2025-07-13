@@ -6,11 +6,23 @@ import { useState, useEffect } from "react";
 import CollegeCard from "@/components/CollegeCard";
 
 
+type College = {
+  _id: string;
+  name: string;
+  image: string;
+  admissionDates: string;
+  events: string[];
+  rating: number;
+  research: string;
+  sports: string[];
+};
+
 export default function ReviewsSection() {
   const { data: colleges, isLoading } = useGetCollegesQuery();
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredColleges, setFilteredColleges] = useState<typeof colleges>([]);
+  const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
 
+ 
 
 
   useEffect(() => {
@@ -42,7 +54,7 @@ export default function ReviewsSection() {
           />
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {filteredColleges?.length > 0 ? (
+            {filteredColleges.length > 0 ? (
               filteredColleges?.map((college) => (
                 <CollegeCard
                   key={college._id}

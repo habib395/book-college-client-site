@@ -1,9 +1,27 @@
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 
+interface Event {
+  name?: string;
+}
 
-export default function CollegeCard({ college }) {
-  const { user } = useAuth()
+interface College {
+  _id: string;
+  name: string;
+  image: string;
+  admissionDates: string;
+  events?: Event[] | string[];
+  research?: string;
+  sports?: string[];
+}
+
+interface CollegeCardProps {
+  college: College;
+}
+
+export default function CollegeCard({ college }: CollegeCardProps) {
+  const { user } = useAuth();
+
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 overflow-hidden flex flex-col h-full">
       <img
@@ -23,8 +41,11 @@ export default function CollegeCard({ college }) {
 
           <p className="text-gray-700">
             <span className="font-medium text-gray-800">📅 Events:</span>{" "}
-            {college.events?.length > 0
-              ? college.events.map(event => event.name || event).join(", ")
+            {college.events?.length
+              ? college.events
+                  .map(event => typeof event === "string" ? event : event.name)
+                  .filter(Boolean)
+                  .join(", ")
               : "N/A"}
           </p>
 
@@ -35,22 +56,22 @@ export default function CollegeCard({ college }) {
 
           <p className="text-gray-700">
             <span className="font-medium text-gray-800">🏅 Sports:</span>{" "}
-            {college.sports?.length > 0 ? college.sports.join(", ") : "N/A"}
+            {college.sports?.length ? college.sports.join(", ") : "N/A"}
           </p>
         </div>
 
         <div className="mt-4 text-right">
-  {user ? (
-    <Link
-      href={`/colleges/${college?._id}`}
-      className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded transition"
-    >
-      Details
-    </Link>
-  ) : (
-    <p className="text-sm text-emerald-500 italic">Login to view details</p>
-  )}
-</div>
+          {user ? (
+            <Link
+              href={`/colleges/${college._id}`}
+              className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded transition"
+            >
+              Details
+            </Link>
+          ) : (
+            <p className="text-sm text-emerald-500 italic">Login to view details</p>
+          )}
+        </div>
       </div>
     </div>
   );
