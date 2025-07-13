@@ -131,7 +131,6 @@ export default function ReviewsSection() {
       </section>
 
       {/* Graduate Gallery */}
-      {/* Graduate Gallery */}
 <section className="bg-white py-14 px-6">
   <div className="max-w-7xl mx-auto">
     <h2 className="text-4xl font-extrabold mb-10 text-center text-gray-800">
